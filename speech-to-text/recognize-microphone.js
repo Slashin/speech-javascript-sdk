@@ -108,19 +108,31 @@ module.exports = function recognizeMicrophone(options) {
       objectMode: true,
       bufferSize: options.bufferSize
     });
-    var pm = options.mediaStream ? Promise.resolve(options.mediaStream) : getUserMedia({ video: false, audio: true });
-    pm.then(function(mediaStream) {
-      micStream.setStream(mediaStream);
-      if (keepMic) {
-        preservedMicStream = micStream;
-      }
-    }).catch(function(err) {
-      stream.emit('error', err);
-      if (err.name === 'NotSupportedError') {
-        stream.end(); // end the stream
-      }
-    });
-  }
+  //   var pm = options.mediaStream ? Promise.resolve(options.mediaStream) : getUserMedia({ video: false, audio: true });
+  //   pm.then(function(mediaStream) {
+  //     micStream.setStream(mediaStream);
+  //     if (keepMic) {
+  //       preservedMicStream = micStream;
+  //     }
+  //   }).catch(function(err) {
+  //     stream.emit('error', err);
+  //     if (err.name === 'NotSupportedError') {
+  //       stream.end(); // end the stream
+  //     }
+  //   });
+  // }
+  navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+  .then(function (stream) {
+    // console.log('got a stream', stream); 
+    micStream.setStream(stream);
+    if (keepMic) {
+      preservedMicStream = micStream;
+    }
+  }).catch(function (err) {
+    console.log('failed');
+    stream.end(); // end the stream
+  });
+
 
   var l16Stream = new L16({ writableObjectMode: true });
 

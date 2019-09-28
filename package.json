@@ -1,7 +1,7 @@
 {
-  "name": "watson-speech",
+  "name": "speechbud-watson-speech",
   "version": "0.36.1",
-  "description": "IBM Watson Speech to Text and Text to Speech SDK for web browsers.",
+  "description": "SpeechBud Speech to Text SDK.",
   "main": "index.js",
   "engines": {
     "node": ">=10"
