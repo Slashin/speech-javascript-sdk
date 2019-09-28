@@ -78,6 +78,7 @@
     "core-js": "^3.2.1",
     "defaults": "^1.0.3",
     "get-user-media-promise": "^1.1.4",
+    "getusermedia": "^2.0.1",
     "lodash.pullallwith": "^4.7.0",
     "microphone-stream": "^5.0.1",
     "nodeify-fetch": "^1.0.1",

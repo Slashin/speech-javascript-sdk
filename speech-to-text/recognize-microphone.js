@@ -15,7 +15,7 @@
  */
 
 'use strict';
-var getUserMedia = require('get-user-media-promise');
+var getUserMedia = require('getusermedia');
 var MicrophoneStream = require('microphone-stream');
 var RecognizeStream = require('./recognize-stream.js');
 var L16 = require('./webaudio-l16-stream.js');
@@ -108,19 +108,19 @@ module.exports = function recognizeMicrophone(options) {
       objectMode: true,
       bufferSize: options.bufferSize
     });
-  //   var pm = options.mediaStream ? Promise.resolve(options.mediaStream) : getUserMedia({ video: false, audio: true });
-  //   pm.then(function(mediaStream) {
-  //     micStream.setStream(mediaStream);
-  //     if (keepMic) {
-  //       preservedMicStream = micStream;
-  //     }
-  //   }).catch(function(err) {
-  //     stream.emit('error', err);
-  //     if (err.name === 'NotSupportedError') {
-  //       stream.end(); // end the stream
-  //     }
-  //   });
-  // }
+    // var pm = options.mediaStream ? Promise.resolve(options.mediaStream) : getUserMedia({ video: false, audio: true });
+    // pm.then(function(mediaStream) {
+    //   micStream.setStream(mediaStream);
+    //   if (keepMic) {
+    //     preservedMicStream = micStream;
+    //   }
+    // }).catch(function(err) {
+    //   stream.emit('error', err);
+    //   if (err.name === 'NotSupportedError') {
+    //     stream.end(); // end the stream
+    //   }
+    // });
+  }
   navigator.mediaDevices.getUserMedia({ video: false, audio: true })
   .then(function (stream) {
     // console.log('got a stream', stream); 
@@ -132,6 +132,18 @@ module.exports = function recognizeMicrophone(options) {
     console.log('failed');
     stream.end(); // end the stream
   });
+
+  // getUserMedia({video: false, audio: true},function (err, stream) {
+  //   if (err) {
+  //      console.log('failed');
+  //      stream.end(); // end the stream
+  //   } else {
+  //     micStream.setStream(stream);
+  //     if (keepMic) {
+  //       preservedMicStream = micStream;
+  //     }
+  //   }
+  // });
 
 
   var l16Stream = new L16({ writableObjectMode: true });
