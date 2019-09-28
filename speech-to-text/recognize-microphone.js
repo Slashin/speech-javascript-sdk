@@ -121,29 +121,29 @@ module.exports = function recognizeMicrophone(options) {
     //   }
     // });
   }
-  navigator.mediaDevices.getUserMedia({ video: false, audio: true })
-  .then(function (stream) {
-    // console.log('got a stream', stream); 
-    micStream.setStream(stream);
-    if (keepMic) {
-      preservedMicStream = micStream;
-    }
-  }).catch(function (err) {
-    console.log('failed');
-    stream.end(); // end the stream
-  });
-
-  // getUserMedia({video: false, audio: true},function (err, stream) {
-  //   if (err) {
-  //      console.log('failed');
-  //      stream.end(); // end the stream
-  //   } else {
-  //     micStream.setStream(stream);
-  //     if (keepMic) {
-  //       preservedMicStream = micStream;
-  //     }
+  // navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+  // .then(function (stream) {
+  //   // console.log('got a stream', stream); 
+  //   micStream.setStream(stream);
+  //   if (keepMic) {
+  //     preservedMicStream = micStream;
   //   }
+  // }).catch(function (err) {
+  //   console.log('failed');
+  //   stream.end(); // end the stream
   // });
+
+  getUserMedia({video: false, audio: true},function (err, stream) {
+    if (err) {
+       console.log('failed');
+       stream.end(); // end the stream
+    } else {
+      micStream.setStream(stream);
+      if (keepMic) {
+        preservedMicStream = micStream;
+      }
+    }
+  });
 
 
   var l16Stream = new L16({ writableObjectMode: true });
